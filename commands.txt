@@ -1,0 +1,9 @@
+# Docker
+docker-compose up --build
+docker-compose up
+docker exec -it django bash
+
+#PostgresSQL
+docker exec -it pgdb psql -U postgres
+\c <database_name>
+\d

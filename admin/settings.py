@@ -26,7 +26,6 @@ SECRET_KEY = 'm#sah5f74f26-rzfow%1!8-3xsiur+9r*ux0%8=%!jcizee!4l'
 DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
-# ALLOWED_HOSTS = ["localhost", "0.0.0.0", "127.0.0.1"]
 
 
 # Application definition
@@ -83,9 +82,9 @@ DATABASES = {
         "PASSWORD": "jv06kgus",
         "HOST": "pgdb",
         "PORT": "5432",
-         "TEST": {
+        "TEST": {
             "NAME": "mytestdatabase",  
-    }
+        }
     }
 }
 
