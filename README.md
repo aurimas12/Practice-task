@@ -6,6 +6,6 @@
 
 > Task 2:
 
-    - Implement swagger UI
-    - Create 2 models: team and parcipinant
-    - Create endpoints: GET/POST/PUT/DELETE
+- Implement swagger UI
+- Create 2 models: team and parcipinant
+- Create endpoints: GET/POST/PUT/DELETE
