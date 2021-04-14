@@ -9,10 +9,12 @@ services:
     ports:
       - "8000:8000"
     depends_on:
-      - db
-  db:
+      - dbv2
+  dbv2:
     image: postgres
-    container_name: pgdb
+    container_name: dbv2
+    ports:
+      - "5432:5432"
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: jv06kgus

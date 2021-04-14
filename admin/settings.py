@@ -80,7 +80,7 @@ DATABASES = {
         "NAME": "postgres",
         "USER": "postgres",
         "PASSWORD": "jv06kgus",
-        "HOST": "pgdb",
+        "HOST": "dbv2",
         "PORT": "5432",
         "TEST": {
             "NAME": "mytestdatabase",  

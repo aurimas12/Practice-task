@@ -7,3 +7,7 @@ docker exec -it django bash
 docker exec -it pgdb psql -U postgres
 \c <database_name>
 \d
+
+# Git
+$ git checkout -b [name_of_your_new_branch] # Create the branch on your local machine and switch in this branch
+$ git push origin [name_of_your_new_branch] # Push the branch on github
