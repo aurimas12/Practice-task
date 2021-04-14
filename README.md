@@ -1,5 +1,7 @@
 # Practice-task
 
+Task management : https://task-api.atlassian.net/jira/software/projects/PT/boards/1
+
 > Task 1:
 
 - Create drf + postgreSQL + docker
