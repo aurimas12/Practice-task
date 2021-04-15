@@ -13,7 +13,9 @@ from team import views
 urlpatterns = [
     # path('', include(router.urls)),
     path("team/", views.get_teams_all),
+    path("participant/", views.get_participants_all),
     path("team/participant/<str:pk>/", views.participant_by_id),
-
+    path("team/participant/<int:pk>/delete/", views.participant_delete),
+    # path("team/test-create", views.create),
   
     ]

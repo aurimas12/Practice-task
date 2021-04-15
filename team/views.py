@@ -15,14 +15,21 @@ GET/POST/PUT/DELETE team api (/team/{team_id}/participant/{participant_id})
  - get singe participant                                        +
  - add participant (underthehood, calls django create user)
  - edit participant (except password)
- - delete participant (user stays, just mapping deleted)
+ - delete participant (user stays, just mapping deleted)        +   
  """
 
-# list all participants (if no participant id provided)
+# list all teams 
 @api_view(["GET"])
 def get_teams_all(req):
     teams = Team.objects.all()
     serializer = TeamSerializer(teams, many=True)
+    return Response(serializer.data)
+
+# list all participants  
+@api_view(["GET"])    
+def get_participants_all(req):
+    teams = Participation.objects.all()
+    serializer = ParticipantSerializer(teams, many=True)
     return Response(serializer.data)
 
 # get single participant
@@ -32,4 +39,16 @@ def participant_by_id(req,pk):
     serializer = ParticipantSerializer(participant, many=False)
     return Response(serializer.data)
 
+# delete participant 
+@api_view(['DELETE'])
+def participant_delete(req,pk): 
+    query = Participation.objects.get(id=pk)
+    query.delete()
+    return Response('deleted')
 
+
+# @api_view(['POST'])
+# def create(req,ParticipantSerializer): 
+#     # query = Participation.objects.get(id=pk)
+#     # query.delete()
+#     return Response('deleted')
