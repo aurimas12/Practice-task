@@ -2,10 +2,18 @@ from django.urls import path,include
 from rest_framework import routers
 from team import views
 
-router =routers.DefaultRouter()
-router.register(r'team',views.TeamViewSet)
-router.register(r'participation',views.ParticipationViewSet)
-urlpatterns = [
-    path('', include(router.urls)),
+# router =routers.DefaultRouter()
+# # router.register(r'team',views.TeamViewSet)
+# router.register('participation',views.ParticipationViewSet.list)
+# router.register('tean/12',views.ParticipationViewSet.as_view({'get':'list'}))
 
+
+# router.register('team1',views.TeamView)
+
+urlpatterns = [
+    # path('', include(router.urls)),
+    path("team/", views.get_teams_all),
+    path("team/participant/<str:pk>/", views.participant_by_id),
+
+  
     ]

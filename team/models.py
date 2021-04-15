@@ -8,6 +8,9 @@ class Team(models.Model):
     url = models.SlugField(max_length=64, validators=[])  # Should be Unique? Of course
     logo = models.ImageField(upload_to='', blank=True, null=True)
 
+    def __str__(self):
+        return self.name
+        
 class Participation(models.Model):
     """
     Participation intermediary model.

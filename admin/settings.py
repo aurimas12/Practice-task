@@ -13,7 +13,7 @@ SECRET_KEY = 'm#sah5f74f26-rzfow%1!8-3xsiur+9r*ux0%8=%!jcizee!4l'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1']
 
 
 # Application definition
@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework.authtoken',
     'drf_yasg',
     'team',
 ]
@@ -101,6 +102,11 @@ SWAGGER_SETTINGS = {
    'USE_SESSION_AUTH': False
 }
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    ),
+}
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
