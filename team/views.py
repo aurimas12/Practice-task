@@ -8,6 +8,10 @@ from rest_framework.decorators import api_view
 
 from rest_framework import status
 from rest_framework.views import APIView
+
+from rest_framework import status, generics, mixins
+from django.http.response import JsonResponse
+from rest_framework.parsers import JSONParser 
 # TODO
 """
 GET/POST/PUT/DELETE team api (/team/{team_id}/participant/{participant_id})
@@ -47,8 +51,21 @@ def participant_delete(req,pk):
     return Response('deleted')
 
 
-# @api_view(['POST'])
-# def create(req,ParticipantSerializer): 
-#     # query = Participation.objects.get(id=pk)
-#     # query.delete()
-#     return Response('deleted')
+# class create(generics.GenericAPIView,mixins.CreateModelMixin):
+class AddParticipant(generics.CreateAPIView):
+    queryset=Participation.objects.all()
+    serializer_class = ParticipantSerializer
+    print('create func start')
+    # def post(self, request):
+    #     if request.method=='POST':
+    #         print('post')
+    #         participant=ParticipantSerializer(data=request.data)
+            
+    #         if participant.is_valid():
+                
+    #             participant.save()
+    #             return Response(participant.data)
+    #             # return self.create(request)
+    #     return Response(participant.errors)
+
+

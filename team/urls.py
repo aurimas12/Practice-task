@@ -1,6 +1,6 @@
 from django.urls import path,include
 from rest_framework import routers
-from team import views
+from team.views import *
 
 # router =routers.DefaultRouter()
 # # router.register(r'team',views.TeamViewSet)
@@ -12,10 +12,10 @@ from team import views
 
 urlpatterns = [
     # path('', include(router.urls)),
-    path("team/", views.get_teams_all),
-    path("participant/", views.get_participants_all),
-    path("team/participant/<str:pk>/", views.participant_by_id),
-    path("team/participant/<int:pk>/delete/", views.participant_delete),
-    # path("team/test-create", views.create),
-  
+    path("team/", get_teams_all),
+    path("participant/", get_participants_all),
+    path("team/participant/<str:pk>/", participant_by_id),
+    path("team/participant/<int:pk>/delete/", participant_delete),
+    path(r"team/participant/create/", AddParticipant.as_view()),
+    # path("team/test-create", views.CreateReservation.as_view()),
     ]
