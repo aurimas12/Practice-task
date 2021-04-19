@@ -2,14 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 # Create your models here.
 
-class Student(models.Model):
-    name=models.CharField(max_length=255)
-    age=models.CharField(max_length=255)
-    size=models.CharField(max_length=255)
-
-    def __str__(self):
-        return self.name
-        
 class Team(models.Model):
     members = models.ManyToManyField(User, through='Participation')
     name = models.CharField(max_length=255, validators=[])

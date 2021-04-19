@@ -9,23 +9,18 @@ from team.views import *
 # router.register('team1',views.TeamView)
 
 urlpatterns = [
-    path("participant/", get_participants_all),
-    path("team/participant/create/", CreateParticipation.as_view()),
-    path("team/", get_teams_all),
-    path("team/participant/<int:pk>/", participant_by_id),
+    # list all participants
+    path("participant/get_all", get_participants_all),
+    # add participant
+    path("participant/create/", CreateParticipation.as_view()),
+    # edit participant
+    path("participant/<int:pk>/update", ParticipantUpdate.as_view()),
+    # delete participant
     path("team/participant/<int:pk>/delete/", participant_delete),
-
-   
-    path("team/team/create/", CreateTeam.as_view()),
+    # get single participant
+    path("team/participant/<int:pk>/", participant_by_id),
     
-    path("student/create/", CreateStudent.as_view()),
-
-    path("update/<int:pk>/update", ParticipantUpdate.as_view()),
-
-
- 
 
     
-   
-  
-    ]
+    
+]
