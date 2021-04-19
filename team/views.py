@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework import viewsets,generics
-from .models import Team,Participation
-from .serializers import TeamSerializer,ParticipantSerializer
+from .models import Team,Participation,Student
+from .serializers import TeamSerializer,ParticipantSerializer,StudentSerializer
 from rest_framework.response import Response
 
 from rest_framework.decorators import api_view
@@ -9,9 +9,10 @@ from rest_framework.decorators import api_view
 from rest_framework import status
 from rest_framework.views import APIView
 
-from rest_framework import status, generics, mixins
+from rest_framework import status, generics, mixins,viewsets
 from django.http.response import JsonResponse
 from rest_framework.parsers import JSONParser 
+
 # TODO
 """
 GET/POST/PUT/DELETE team api (/team/{team_id}/participant/{participant_id})
@@ -50,22 +51,37 @@ def participant_delete(req,pk):
     query.delete()
     return Response('deleted')
 
+# Create participation
+class CreateParticipation(
+    generics.GenericAPIView,
+    mixins.CreateModelMixin,
+):
 
-# class create(generics.GenericAPIView,mixins.CreateModelMixin):
-class AddParticipant(generics.CreateAPIView):
-    queryset=Participation.objects.all()
     serializer_class = ParticipantSerializer
-    print('create func start')
-    # def post(self, request):
-    #     if request.method=='POST':
-    #         print('post')
-    #         participant=ParticipantSerializer(data=request.data)
-            
-    #         if participant.is_valid():
-                
-    #             participant.save()
-    #             return Response(participant.data)
-    #             # return self.create(request)
-    #     return Response(participant.errors)
+    
+    def post(self, request):
 
+        return self.create(request)
+
+# Create team
+class CreateTeam(
+    generics.GenericAPIView,
+    mixins.CreateModelMixin,
+):
+
+    serializer_class = TeamSerializer
+
+    def post(self, request):
+        
+        return self.create(request)
+
+
+class CreateStudent(generics.GenericAPIView,
+    mixins.CreateModelMixin):
+    queryset=Student.objects.all()
+    serializer_class = StudentSerializer
+    print('create func start')
+    def post(self, request):
+        
+        return self.create(request)
 

@@ -13,7 +13,7 @@ SECRET_KEY = 'm#sah5f74f26-rzfow%1!8-3xsiur+9r*ux0%8=%!jcizee!4l'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -58,7 +58,7 @@ TEMPLATES = [
         },
     },
 ]
-
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 WSGI_APPLICATION = 'admin.wsgi.application'
 
 
@@ -67,13 +67,15 @@ WSGI_APPLICATION = 'admin.wsgi.application'
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql_psycopg2",
-        # "ENGINE": "django.db.backends.postgresql",
+        # "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "ENGINE": "django.db.backends.postgresql",
         "NAME": "postgres",
         "USER": "postgres",
-        "PASSWORD": "jv06kgus",
-        "HOST": "dbv2",
+        "HOST": "pgdb",
         "PORT": "5432",
+        "PASSWORD": "jv06kgus",
+        
+        
         "TEST": {
             "NAME": "mytestdatabase",  
         }
