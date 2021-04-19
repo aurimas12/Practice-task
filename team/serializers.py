@@ -12,10 +12,6 @@ class ParticipantSerializer(serializers.ModelSerializer):
         model=Participation
         fields='__all__'
     
-    # def create(self,validated):
-    #     Participation.objects.create(**validated_data)
-    #     return Response('created')
-        
 class StudentSerializer(serializers.ModelSerializer):
     class Meta:
         model=Student

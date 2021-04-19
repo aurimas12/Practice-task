@@ -85,3 +85,9 @@ class CreateStudent(generics.GenericAPIView,
         
         return self.create(request)
 
+# patricipant update
+class ParticipantUpdate(generics.UpdateAPIView):
+    serializer_class = ParticipantSerializer
+    queryset = Participation.objects.all()
+
+

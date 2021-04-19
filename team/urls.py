@@ -20,7 +20,10 @@ urlpatterns = [
     
     path("student/create/", CreateStudent.as_view()),
 
-    # path("edit", EditMethod.as_view()),
+    path("update/<int:pk>/update", ParticipantUpdate.as_view()),
+
+
+ 
 
     
    
