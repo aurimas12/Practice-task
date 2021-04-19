@@ -9,16 +9,22 @@ from rest_framework import generics, mixins,viewsets
 # list all participants  
 @api_view(["GET"])    
 def get_participants_all(req):
-    teams = Participation.objects.all()
-    serializer = ParticipantSerializer(teams, many=True)
+    participants = Participation.objects.all()
+    serializer = ParticipantSerializer(participants, many=True)
     return Response(serializer.data)
 
-# get single participant
+# get single participant in team
 @api_view(["GET"])
 def participant_by_id(req,pk):
     participant = Participation.objects.get(id=pk)
     serializer = ParticipantSerializer(participant, many=False)
     return Response(serializer.data)
+
+# create participant
+class CreateParticipation(generics.GenericAPIView,mixins.CreateModelMixin,):
+    serializer_class = ParticipantSerializer
+    def post(self, request):
+        return self.create(request)
 
 # delete participant 
 @api_view(['DELETE'])
@@ -26,12 +32,6 @@ def participant_delete(req,pk):
     query = Participation.objects.get(id=pk)
     query.delete()
     return Response('deleted')
-
-# Create participation
-class CreateParticipation(generics.GenericAPIView,mixins.CreateModelMixin,):
-    serializer_class = ParticipantSerializer
-    def post(self, request):
-        return self.create(request)
 
 # patricipant update
 class ParticipantUpdate(generics.UpdateAPIView):
