@@ -8,6 +8,7 @@ __pycache__/
 
 # VS Code
 .vscode
+
 # Distribution / packaging
 .Python
 build/
@@ -134,3 +135,6 @@ Thumbs.db
 
 # profiling data
 .prof
+
+# others
+commands.txt
