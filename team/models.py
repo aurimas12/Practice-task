@@ -30,3 +30,5 @@ class Participation(models.Model):
     team = models.ForeignKey(Team, on_delete=models.CASCADE, related_name='participations')
     account = models.ForeignKey(User, on_delete=models.CASCADE, related_name='participations')
     role = models.PositiveSmallIntegerField(choices=ROLE)
+
+
