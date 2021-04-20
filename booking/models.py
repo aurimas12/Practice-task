@@ -18,7 +18,7 @@ class BookableType(models.Model):
 class Bookable(models.Model):
     bookable_type_id=models.ForeignKey(BookableType, on_delete=models.CASCADE)
     name=models.CharField(max_length=256)
-    team_id=models.ForeignKey(Team, on_delete=models.CASCADE, related_name='Participation')
+    team_id=models.ForeignKey(Team, on_delete=models.CASCADE)
 
 class Booking(models.Model):
     bookable_id= models.ForeignKey(Bookable, on_delete=models.CASCADE)
