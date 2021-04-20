@@ -1,5 +1,6 @@
 {
     "editor.formatOnSave": true,
     "python.formatting.autopep8Path": "black",
-    "python.formatting.provider": "black"
+    "python.formatting.provider": "black",
+    "python.pythonPath": "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\Python37_86\\python.exe"
 }
