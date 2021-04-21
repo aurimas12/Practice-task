@@ -20,7 +20,6 @@ class BookableType(models.Model):
     def __str__(self):
         return self.name
 
-
 class Bookable(models.Model):
     bookable_type_id=models.ForeignKey(BookableType, on_delete=models.CASCADE)
     name=models.CharField(max_length=256)

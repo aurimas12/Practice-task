@@ -10,4 +10,6 @@ class BookableViewSet(viewsets.ModelViewSet):
     queryset=Bookable.objects.all()
     serializer_class= BookableSerializer
 
-    
+class BookingViewSet(viewsets.ModelViewSet):
+    queryset=Booking.objects.all()
+    serializer_class= BookingSerializer    
