@@ -15,7 +15,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -29,7 +28,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'drf_yasg',
     'team',
-    'booking'
+    'booking',
 ]
 
 MIDDLEWARE = [
@@ -75,8 +74,6 @@ DATABASES = {
         "HOST": "pgdb",
         "PORT": "5432",
         "PASSWORD": "jv06kgus",
-        
-        
         "TEST": {
             "NAME": "mytestdatabase",  
         }

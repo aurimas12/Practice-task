@@ -17,7 +17,7 @@ services:
     container_name: pgdb
     restart: always
     ports:
-      - "5433:5432"
+      - 5433:5432
     environment:
       POSTGRES_DB: practice_db
       POSTGRES_USER: postgres

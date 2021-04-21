@@ -31,4 +31,6 @@ class Participation(models.Model):
     account = models.ForeignKey(User, on_delete=models.CASCADE, related_name='participations')
     role = models.PositiveSmallIntegerField(choices=ROLE)
 
+    def __str__(self):
+        return self.account.username
 
