@@ -1,6 +1,13 @@
 {
     "editor.formatOnSave": true,
+    "cornflakes.linter.executablePath": "path/to/venvs/myvenv/bin/flake8",
+    "cornflakes.linter.run": "onType",
     "python.formatting.autopep8Path": "black",
-    "python.formatting.provider": "black",
-    "python.pythonPath": "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\Python37_86\\python.exe"
+    "python.formatting.blackPath": "/usr/local/bin/black",
+    "python.pythonPath": "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\Python37_86\\python.exe",
+    "python.formatting.provider": "autopep8",
+    "python.linting.flake8Args": [
+        "--max-line-length=120",
+        "--ignore=E402,F841,F401,E302,E305",
+    ],
 }
