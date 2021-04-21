@@ -70,7 +70,7 @@ DATABASES = {
     "default": {
         # "ENGINE": "django.db.backends.postgresql_psycopg2",
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "postgres",
+        "NAME": "practice_db",
         "USER": "postgres",
         "HOST": "pgdb",
         "PORT": "5432",
