@@ -6,3 +6,8 @@ class BookableTypeSerializer(serializers.ModelSerializer):
     class Meta:
         model = BookableType
         fields = '__all__'
+
+class BookableSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Bookable
+        fields = '__all__'
