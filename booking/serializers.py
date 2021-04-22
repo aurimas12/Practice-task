@@ -19,8 +19,9 @@ class BookingSerializer(serializers.ModelSerializer):
         model = Booking
         fields = "__all__"
 
-    def validate_date_from(self, value):
-        date_from = Booking.objects.filter(date_from=value)
-        if date_from.exists():
-            raise serializers.ValidationError("This date from is exist")
-        return value
+    # validators
+    # def validate_date_from(self, value):
+    #     date_from = Booking.objects.filter(date_from=value)
+    #     if date_from.exists():
+    #         raise serializers.ValidationError("This date from is exist")
+    #     return value
