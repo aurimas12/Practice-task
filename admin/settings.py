@@ -15,7 +15,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -29,7 +28,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'drf_yasg',
     'team',
-    'booking'
+    'booking',
 ]
 
 MIDDLEWARE = [
@@ -70,13 +69,11 @@ DATABASES = {
     "default": {
         # "ENGINE": "django.db.backends.postgresql_psycopg2",
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "postgres",
+        "NAME": "practice_db",
         "USER": "postgres",
         "HOST": "pgdb",
         "PORT": "5432",
         "PASSWORD": "jv06kgus",
-        
-        
         "TEST": {
             "NAME": "mytestdatabase",  
         }
