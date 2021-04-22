@@ -2,11 +2,6 @@ from rest_framework import viewsets, status
 from .models import BookableType, Bookable, Booking
 from .serializers import BookableTypeSerializer, BookableSerializer, BookingSerializer
 from rest_framework.response import Response
-from rest_framework.decorators import action
-from src.services import BookingService
-from rest_framework.exceptions import APIException
-from src.services.BookingService import BadRequestException
-from src.exceptions.bookingException import BadRequestException
 from src.services.BookingService import check_date_from
 
 

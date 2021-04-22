@@ -1,5 +1,11 @@
 from django.urls import include, path
-from team.views import *
+from team.views import (
+    get_participants_all,
+    participant_by_id,
+    CreateParticipation,
+    ParticipantUpdate,
+    participant_delete,
+)
 
 urlpatterns = [
     path("team/participant/all", get_participants_all),
