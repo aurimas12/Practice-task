@@ -8,7 +8,7 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 
 
-class ShopTestCase(TestCase):
+class BookingViewSetTestCase(TestCase):
     def setUp(self):
         self.user = User.objects.create(username="admin", password="admin")
         self.team = Team.objects.create(name="Black Team", url="black")
@@ -26,7 +26,7 @@ class ShopTestCase(TestCase):
             participant_id=self.participation,
         )
 
-    def test_data(self):
+    def test_create_booking(self):
         valid_data = {
             "date_from": "2021-04-22T22:14:33.575Z",
             "date_to": "2021-04-22T22:14:33.575Z",
