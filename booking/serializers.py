@@ -5,7 +5,8 @@ from .models import BookableType, Bookable, Booking
 class BookableTypeSerializer(serializers.ModelSerializer):
     class Meta:
         model = BookableType
-        fields = "__all__"
+        fields = ["id", "bookable_type", "name", "limit"]
+        read_only_fields = ["limit"]
 
 
 class BookableSerializer(serializers.ModelSerializer):

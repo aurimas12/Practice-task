@@ -17,6 +17,7 @@ class BookableType(models.Model):
 
     bookable_type = models.PositiveSmallIntegerField(choices=TYPE)
     name = models.CharField(max_length=256)
+    limit = models.PositiveSmallIntegerField(default=12)
 
     def __str__(self):
         return self.name
