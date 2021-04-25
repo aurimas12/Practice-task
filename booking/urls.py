@@ -6,16 +6,23 @@ from booking.views import (
     BookableTypeLimitViewSet,
 )
 
+# from .views import update
+
 urlpatterns = [
     # BookableTypeLimit
     path(
-        "bookable-typelimit/all",
+        "bookable-type-limit/all",
         BookableTypeLimitViewSet.as_view({"get": "list"}),
         name="bookable-type",
     ),
     path(
-        "bookable-typelimit/create",
+        "bookable-type-limit/create",
         BookableTypeLimitViewSet.as_view({"post": "create"}),
+        name="bookable-type",
+    ),
+    path(
+        "bookable-type-limit/all/edit/<int:pk>",
+        BookableTypeLimitViewSet.as_view({"put": "update"}),
         name="bookable-type",
     ),
     # BookableType

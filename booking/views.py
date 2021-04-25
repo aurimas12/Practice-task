@@ -10,6 +10,9 @@ from rest_framework.response import Response
 from src.services.BookingService import check_date_from
 from rest_framework.decorators import action
 
+from rest_framework.decorators import api_view
+from rest_framework.views import APIView
+
 
 class BookableTypeLimitViewSet(viewsets.ModelViewSet):
     queryset = BookableTypeLimit.objects.all()

@@ -12,7 +12,8 @@ class BookableTypeSerializer(serializers.ModelSerializer):
 class BookableTypeLimitSerializer(serializers.ModelSerializer):
     class Meta:
         model = BookableTypeLimit
-        fields = ["workspace_limit", "meeting_room_limit", "parking_spot_limit"]
+        fields = "__all__"
+        # fields = ["workspace_limit", "meeting_room_limit", "parking_spot_limit"]
 
 
 class BookableSerializer(serializers.ModelSerializer):
