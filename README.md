@@ -29,3 +29,10 @@ Task management : https://task-api.atlassian.net/jira/software/projects/PT/board
 - Create endpoint get and edit Booking type limits
 - Disable create create booking type when limit is reached
 - Get a message when trying to create a booking type when the limit is exceeded
+
+> Task 6:
+
+Participant roles:
+- Admin - ignores overlapping booking restrictions
+- Admin, assistant - when booking can specify the id of another user on whose behalf booking
+- User nothing changes
