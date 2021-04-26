@@ -25,7 +25,7 @@ def get_bookable_type_count(bookable_type_id):
     return count
 
 
-def test():
+def get_bookable_types_limits():
     workspace = 0
     meeting_room = 0
     car_spot = 0
@@ -45,3 +45,13 @@ def test():
             car_spot += 1
         print(i.bookable_type)
     return workspace, meeting_room, car_spot
+
+
+def check_request_bookable_type(request):
+    request_bookable_type_id = request.data["bookable_type_id"]
+    print("*****")
+
+    print(request_bookable_type_id)
+    a = BookableType.objects.get(id=request_bookable_type_id)
+    print(a.bookable_type)
+    return a.bookable_type
