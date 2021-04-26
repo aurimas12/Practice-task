@@ -12,6 +12,7 @@ from .serializers import (
     BookingSerializer,
     BookableTypeLimitSerializer,
 )
+
 from src.services.BookingService import check_date_from
 from src.services.BookableTypeLimitService import (
     get_workspace_count,
@@ -21,6 +22,7 @@ from src.services.BookableTypeLimitService import (
     get_bookable_types_limits,
     request_save_data,
 )
+from src.signals import create_post_signal
 
 
 class BookableTypeLimitViewSet(viewsets.ModelViewSet):
@@ -63,7 +65,7 @@ class BookableViewSet(viewsets.ModelViewSet):
             if car_spot < parking_spot_limit:
                 request_save_data(serializer)
 
-        return Response("Can't booking this place")
+        return Response(create_post_signal())
 
 
 class BookingViewSet(viewsets.ModelViewSet):
