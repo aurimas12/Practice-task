@@ -4,7 +4,7 @@ from rest_framework.decorators import action
 from rest_framework.decorators import api_view
 from rest_framework.views import APIView
 
-from .models import BookableType, Bookable, Booking, BookableTypeLimit
+from .models import BookableType, Bookable, Booking, BookableTypeLimit, Participation
 
 from .serializers import (
     BookableTypeSerializer,
@@ -23,6 +23,7 @@ from src.services.BookableTypeLimitService import (
     request_save_data,
 )
 from src.signals import create_post_signal
+from src.services.ParticipantService import identity_roles
 
 
 class BookableTypeLimitViewSet(viewsets.ModelViewSet):
@@ -32,7 +33,8 @@ class BookableTypeLimitViewSet(viewsets.ModelViewSet):
     def list(self, request):
         queryset = BookableTypeLimit.objects.all()
         serializer = BookableTypeLimitSerializer(queryset, many=True)
-
+        participation = Participation.objects.get(id=1)
+        print(identity_roles(participation))
         return Response(serializer.data)
 
 

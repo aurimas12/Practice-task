@@ -39,5 +39,5 @@ class Participation(models.Model):
     )
     role = models.PositiveSmallIntegerField(choices=ROLE)
 
-    def __str__(self):
-        return self.account.username
+    # def __str__(self):
+    #     return self.account.username
