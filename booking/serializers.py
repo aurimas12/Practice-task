@@ -1,11 +1,18 @@
 from rest_framework import serializers
-from .models import BookableType, Bookable, Booking
+from .models import BookableType, Bookable, Booking, BookableTypeLimit
 
 
 class BookableTypeSerializer(serializers.ModelSerializer):
     class Meta:
         model = BookableType
+        fields = ["id", "bookable_type", "name"]
+
+
+class BookableTypeLimitSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = BookableTypeLimit
         fields = "__all__"
+        # fields = ["workspace_limit", "meeting_room_limit", "parking_spot_limit"]
 
 
 class BookableSerializer(serializers.ModelSerializer):

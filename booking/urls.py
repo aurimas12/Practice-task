@@ -1,7 +1,30 @@
 from django.urls import include, path
-from booking.views import BookableTypeViewSet, BookableViewSet, BookingViewSet
+from booking.views import (
+    BookableTypeViewSet,
+    BookableViewSet,
+    BookingViewSet,
+    BookableTypeLimitViewSet,
+)
+
+# from .views import update
 
 urlpatterns = [
+    # BookableTypeLimit
+    path(
+        "bookable-type-limit/all",
+        BookableTypeLimitViewSet.as_view({"get": "list"}),
+        name="bookable-type",
+    ),
+    path(
+        "bookable-type-limit/create",
+        BookableTypeLimitViewSet.as_view({"post": "create"}),
+        name="bookable-type",
+    ),
+    path(
+        "bookable-type-limit/all/edit/<int:pk>",
+        BookableTypeLimitViewSet.as_view({"put": "update"}),
+        name="bookable-type",
+    ),
     # BookableType
     path(
         "bookable-type/all",

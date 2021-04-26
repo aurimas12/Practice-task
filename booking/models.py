@@ -4,6 +4,12 @@ from team.models import Team, Participation
 # Create your models here.
 
 
+class BookableTypeLimit(models.Model):
+    workspace_limit = models.PositiveSmallIntegerField()
+    meeting_room_limit = models.PositiveSmallIntegerField()
+    parking_spot_limit = models.PositiveSmallIntegerField()
+
+
 class BookableType(models.Model):
     TYPE_WORKSPACE = 1
     TYPE_MEETING_ROOM = 2
@@ -17,9 +23,10 @@ class BookableType(models.Model):
 
     bookable_type = models.PositiveSmallIntegerField(choices=TYPE)
     name = models.CharField(max_length=256)
+    # meeting_room_limit = models.PositiveSmallIntegerField(default=3)
 
-    def __str__(self):
-        return self.name
+    # def __str__(self):
+    #     return self.name
 
 
 class Bookable(models.Model):
@@ -27,8 +34,8 @@ class Bookable(models.Model):
     name = models.CharField(max_length=256)
     team_id = models.ForeignKey(Team, on_delete=models.CASCADE)
 
-    def __str__(self):
-        return self.name
+    # def __str__(self):
+    #     return self.name
 
 
 class Booking(models.Model):
