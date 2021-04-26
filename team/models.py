@@ -20,15 +20,15 @@ class Participation(models.Model):
     Connects Team with Account as many to many.
     """
 
-    ROLE_PARTICIPANT = 1
-    ROLE_ADMINISTRATOR = 2
-    ROLE_OWNER = 3
+    ROLE_ADMIN = 1
+    ROLE_ASSISTANT = 2
+    ROLE_USER = 3
 
     # private field
     ROLE = (
-        (ROLE_PARTICIPANT, ("Participant")),
-        (ROLE_ADMINISTRATOR, ("Administrator")),
-        (ROLE_OWNER, ("Owner")),
+        (ROLE_ADMIN, ("Admin")),
+        (ROLE_ASSISTANT, ("Assistant")),
+        (ROLE_USER, ("User")),
     )
 
     team = models.ForeignKey(
