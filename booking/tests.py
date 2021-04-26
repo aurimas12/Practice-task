@@ -13,9 +13,11 @@ class BookingViewSetTestCase(TestCase):
         self.user = User.objects.create(username="admin", password="admin")
         self.team = Team.objects.create(name="Black Team", url="black")
         self.participation = Participation.objects.create(
-            role=1, team=self.team, account=self.user
+            role=Participation.ROLE_PARTICIPANT, team=self.team, account=self.user
         )
-        self.bookabletype = BookableType.objects.create(bookable_type=1, name="strin2g")
+        self.bookabletype = BookableType.objects.create(
+            bookable_type=Participation.ROLE_PARTICIPANT, name="strin2g"
+        )
         self.bookable = Bookable.objects.create(
             name="string", bookable_type_id=self.bookabletype, team_id=self.team
         )
@@ -26,7 +28,7 @@ class BookingViewSetTestCase(TestCase):
             participant_id=self.participation,
         )
 
-    def test_create_booking(self):
+    def test_create_booking_then_overlapping_booking(self):
         valid_data = {
             "date_from": "2021-04-22T22:14:33.575Z",
             "date_to": "2021-04-22T22:14:33.575Z",
