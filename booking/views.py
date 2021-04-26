@@ -76,7 +76,55 @@ class BookingViewSet(viewsets.ModelViewSet):
 
     def create(self, request):
         serializer = BookingSerializer(data=request.data)
-        if serializer.is_valid():
-            check_date_from(request)
-            serializer.save()
-            return Response({"msg": "Data Created"}, status=status.HTTP_201_CREATED)
+        data = request.data
+
+        # participation info
+        result = identity_roles(Participation.objects.get(id=data["participant_id"]))
+
+        # booking info
+
+        bookable = Bookable.objects.get(id=data["bookable_id"])
+
+        bookable_type_number = bookable.bookable_type_id.bookable_type
+
+        limit = BookableTypeLimit.objects.get(id=1)
+
+        print("***")
+        workspace, meeting_room, car_spot = get_bookable_types_limits()
+
+        """start logic"""
+        # 1.Get Status
+        result = identity_roles(Participation.objects.get(id=data["participant_id"]))
+        # request_bookable_type = check_request_bookable_type(request)
+        # workspace, meeting_room, car_spot = get_bookable_types_limits()
+
+        if result == Participation.ROLE_ADMIN:
+            print("admin")
+            if serializer.is_valid():
+                check_date_from(request)
+                serializer.save()
+                return Response({"msg": "Data Created"}, status=status.HTTP_201_CREATED)
+        elif result == Participation.ROLE_ASSISTANT:
+            print(limit.parking_spot_limit)
+
+            count_bookables = len(
+                Bookable.objects.filter(bookable_type_id=BookableType.TYPE_PARKING_SPOT)
+            )
+            print(car_spot)
+            print(count_bookables)
+            if limit.parking_spot_limit > count_bookables:
+                if serializer.is_valid():
+                    check_date_from(request)
+                    serializer.save()
+                    return Response(
+                        {"msg": "Data Created"}, status=status.HTTP_201_CREATED
+                    )
+            else:
+                return Response("No empty places!")
+            # if count_bookables<
+            return Response("Assistant business logic")
+        elif result == Participation.ROLE_USER:
+            # only parking
+            print("user")
+
+        return Response("nieko nevyksta")
