@@ -36,3 +36,10 @@ Participant roles:
 - Admin - ignores overlapping booking restrictions
 - Admin, assistant - when booking can specify the id of another user on whose behalf booking
 - User nothing changes
+
+> Task 7:
+
+Participant roles:
+- Testing endpoints with tst data are all is good working
+- Create user Authentication
+- Then create booking show what user make this booking
