@@ -14,3 +14,6 @@ $ git push origin [name_of_your_new_branch] # Push the branch on github
 
 # Unit Test
 docker-compose run --rm --entrypoint "python3 manage.py test" django
+
+# Auth
+python manage.py drf_create_token {username}
