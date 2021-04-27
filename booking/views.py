@@ -33,8 +33,8 @@ class BookableTypeLimitViewSet(viewsets.ModelViewSet):
     def list(self, request):
         queryset = BookableTypeLimit.objects.all()
         serializer = BookableTypeLimitSerializer(queryset, many=True)
-        participation = Participation.objects.get(id=1)
-        print(identity_roles(participation))
+
+        print(BookableType.TYPE_MEETING_ROOM)
         return Response(serializer.data)
 
 
@@ -76,6 +76,7 @@ class BookingViewSet(viewsets.ModelViewSet):
 
     def create(self, request):
         serializer = BookingSerializer(data=request.data)
+
         bookable_id = request.data["bookable_id"]
         user_id = request.data["participant_id"]
         role = identity_roles(Participation.objects.get(id=user_id))
@@ -84,66 +85,47 @@ class BookingViewSet(viewsets.ModelViewSet):
 
         limits = BookableTypeLimit.objects.get(id=1)  # important
         exist_booking = Booking.objects.filter(bookable_id=bookable_id)  # important
+
         if Participation.ROLE_ADMIN == role[0]:
-            if serializer.is_valid():
-                check_date_from(request)
-                serializer.save()
-                return Response({"msg": "Data Created"}, status=status.HTTP_201_CREATED)
+            request_save_data(serializer)
+
         elif Participation.ROLE_ASSISTANT == role[0]:
-            if booking_type == 1:
+
+            if booking_type == BookableType.TYPE_WORKSPACE:
+
                 if limits.workspace_limit > len(exist_booking):
-                    if serializer.is_valid():
-                        check_date_from(request)
-                        serializer.save()
-                        return Response(
-                            {"msg": "Data Created"}, status=status.HTTP_201_CREATED
-                        )
+                    request_save_data(serializer)
                 return Response("Bad request data")
-            elif booking_type == 2:
+
+            elif booking_type == BookableType.TYPE_MEETING_ROOM:
+
                 if limits.meeting_room_limit > len(exist_booking):
-                    if serializer.is_valid():
-                        check_date_from(request)
-                        serializer.save()
-                        return Response(
-                            {"msg": "Data Created"}, status=status.HTTP_201_CREATED
-                        )
-                    return Response("Bad request data")
-            elif booking_type == 3:
-                if limits.parking_spot_limit > len(exist_booking):
-                    if serializer.is_valid():
-                        check_date_from(request)
-                        serializer.save()
-                        return Response(
-                            {"msg": "Data Created"}, status=status.HTTP_201_CREATED
-                        )
-                    return Response("Bad request data")
-        elif Participation.ROLE_USER == role[0]:
-            if booking_type == 1:
-                if limits.workspace_limit > len(exist_booking):
-                    if serializer.is_valid():
-                        check_date_from(request)
-                        serializer.save()
-                        return Response(
-                            {"msg": "Data Created"}, status=status.HTTP_201_CREATED
-                        )
-                return Response("Bad request data")
-            elif booking_type == 2:
-                if limits.meeting_room_limit > len(exist_booking):
-                    if serializer.is_valid():
-                        check_date_from(request)
-                        serializer.save()
-                        return Response(
-                            {"msg": "Data Created"}, status=status.HTTP_201_CREATED
-                        )
-                    return Response("Bad request data")
-            elif booking_type == 3:
-                if limits.parking_spot_limit > len(exist_booking):
-                    if serializer.is_valid():
-                        check_date_from(request)
-                        serializer.save()
-                        return Response(
-                            {"msg": "Data Created"}, status=status.HTTP_201_CREATED
-                        )
+                    request_save_data(serializer)
                     return Response("Bad request data")
 
-        return Response("nieko nevyksta")
+            elif booking_type == BookableType.TYPE_PARKING_SPOT:
+
+                if limits.parking_spot_limit > len(exist_booking):
+                    request_save_data(serializer)
+                    return Response("Bad request data")
+
+        elif Participation.ROLE_USER == role[0]:
+
+            if booking_type == BookableType.TYPE_WORKSPACE:
+                if limits.workspace_limit > len(exist_booking):
+                    request_save_data(serializer)
+                return Response("Bad request data")
+
+            elif booking_type == BookableType.TYPE_MEETING_ROOM:
+
+                if limits.meeting_room_limit > len(exist_booking):
+                    request_save_data(serializer)
+                    return Response("Bad request data")
+
+            elif booking_type == BookableType.TYPE_PARKING_SPOT:
+
+                if limits.parking_spot_limit > len(exist_booking):
+                    request_save_data(serializer)
+                    return Response("Bad request data")
+
+        return Response("No action!")
