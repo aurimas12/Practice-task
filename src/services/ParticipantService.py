@@ -14,5 +14,4 @@ def identity_roles(user):
 
     for a in Participation.ROLE:
         if user.role == a[0]:
-            return user.role
-    print("******")
+            return user.role, a[1]
