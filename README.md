@@ -39,7 +39,6 @@ Participant roles:
 
 > Task 7:
 
-Participant roles:
 - Testing endpoints with tst data are all is good working
 - Create user Authentication
 - Then create booking show what user make this booking
