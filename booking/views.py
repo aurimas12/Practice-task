@@ -27,7 +27,7 @@ from src.services.BookableTypeLimitService import (
 )
 from src.signals import create_post_signal
 from src.services.ParticipantService import identity_roles
-
+from src.services.AuthenticationService import get_auth_user_name
 from rest_framework import permissions
 
 
@@ -36,11 +36,11 @@ class BookableTypeLimitViewSet(viewsets.ModelViewSet):
     serializer_class = BookableTypeLimitSerializer
     permission_classes = (permissions.IsAuthenticated,)
 
-    def list(self, request):
+    def list(self, request, **kwargs):
         queryset = BookableTypeLimit.objects.all()
         serializer = BookableTypeLimitSerializer(queryset, many=True)
-
-        print(BookableType.TYPE_MEETING_ROOM)
+        # return account auth name - testing
+        print(get_auth_user_name(request))
         return Response(serializer.data)
 
 
