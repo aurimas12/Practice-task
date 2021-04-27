@@ -13,7 +13,10 @@ from .serializers import (
     BookableTypeLimitSerializer,
 )
 
-from src.services.BookingService import check_date_from
+from src.services.BookingService import (
+    check_date_from,
+    user_role_limitations_for_created,
+)
 from src.services.BookableTypeLimitService import (
     get_workspace_count,
     get_meeting_room_count,
@@ -73,9 +76,27 @@ class BookableViewSet(viewsets.ModelViewSet):
 class BookingViewSet(viewsets.ModelViewSet):
     queryset = Booking.objects.all()
     serializer_class = BookingSerializer
+    # def create(self, request):
+    #         serializer = BookingSerializer(data=request.data)
 
+    #         data = request.data["participant_id"]
+    #         participant = Participation.objects.get(id=data)
+    #         participant_role = participant.role
+
+    #         if role == participant_role:
+    #             print("save time")
+    #             if serializer.is_valid():
+    #                 serializer.save()
+    #                 return Response({"msg": "Data Created"}, status=status.HTTP_201_CREATED)
+    #         else:
+    #             return Response("User role have limitations")
     def create(self, request):
         serializer = BookingSerializer(data=request.data)
+        # # role and participation role
+        # role = Participation.ROLE_USER  # important
+        # data = request.data["participant_id"]  # important
+        # participant = Participation.objects.get(id=data)  # important
+        # participant_role = participant.role  # important
 
         bookable_id = request.data["bookable_id"]
         user_id = request.data["participant_id"]
@@ -111,21 +132,22 @@ class BookingViewSet(viewsets.ModelViewSet):
 
         elif Participation.ROLE_USER == role[0]:
 
-            if booking_type == BookableType.TYPE_WORKSPACE:
-                if limits.workspace_limit > len(exist_booking):
-                    request_save_data(serializer)
-                return Response("Bad request data")
+            if user_role_limitations_for_created(request) is True:
+                if booking_type == BookableType.TYPE_WORKSPACE:
+                    if limits.workspace_limit > len(exist_booking):
+                        request_save_data(serializer)
+                    return Response("Bad request data")
 
             elif booking_type == BookableType.TYPE_MEETING_ROOM:
-
-                if limits.meeting_room_limit > len(exist_booking):
-                    request_save_data(serializer)
-                    return Response("Bad request data")
+                if user_role_limitations_for_created(request) is True:
+                    if limits.meeting_room_limit > len(exist_booking):
+                        request_save_data(serializer)
+                        return Response("Bad request data")
 
             elif booking_type == BookableType.TYPE_PARKING_SPOT:
-
-                if limits.parking_spot_limit > len(exist_booking):
-                    request_save_data(serializer)
-                    return Response("Bad request data")
+                if user_role_limitations_for_created(request) is True:
+                    if limits.parking_spot_limit > len(exist_booking):
+                        request_save_data(serializer)
+                        return Response("Bad request data")
 
         return Response("No action!")
