@@ -76,20 +76,74 @@ class BookingViewSet(viewsets.ModelViewSet):
 
     def create(self, request):
         serializer = BookingSerializer(data=request.data)
-
-        """roles status check"""
-
+        bookable_id = request.data["bookable_id"]
         user_id = request.data["participant_id"]
         role = identity_roles(Participation.objects.get(id=user_id))
+        bookable_obj = Bookable.objects.get(id=bookable_id)
+        booking_type = bookable_obj.bookable_type_id.bookable_type
+
+        limits = BookableTypeLimit.objects.get(id=1)  # important
+        exist_booking = Booking.objects.filter(bookable_id=bookable_id)  # important
         if Participation.ROLE_ADMIN == role[0]:
-            # admin
-            print("admin")
             if serializer.is_valid():
-                # check_date_from(request)
+                check_date_from(request)
                 serializer.save()
                 return Response({"msg": "Data Created"}, status=status.HTTP_201_CREATED)
-        else:
-            print("assistant and user")
-            # assistant and user
-            return Response("assistant and user")
+        elif Participation.ROLE_ASSISTANT == role[0]:
+            if booking_type == 1:
+                if limits.workspace_limit > len(exist_booking):
+                    if serializer.is_valid():
+                        check_date_from(request)
+                        serializer.save()
+                        return Response(
+                            {"msg": "Data Created"}, status=status.HTTP_201_CREATED
+                        )
+                return Response("Bad request data")
+            elif booking_type == 2:
+                if limits.meeting_room_limit > len(exist_booking):
+                    if serializer.is_valid():
+                        check_date_from(request)
+                        serializer.save()
+                        return Response(
+                            {"msg": "Data Created"}, status=status.HTTP_201_CREATED
+                        )
+                    return Response("Bad request data")
+            elif booking_type == 3:
+                if limits.parking_spot_limit > len(exist_booking):
+                    if serializer.is_valid():
+                        check_date_from(request)
+                        serializer.save()
+                        return Response(
+                            {"msg": "Data Created"}, status=status.HTTP_201_CREATED
+                        )
+                    return Response("Bad request data")
+        elif Participation.ROLE_USER == role[0]:
+            if booking_type == 1:
+                if limits.workspace_limit > len(exist_booking):
+                    if serializer.is_valid():
+                        check_date_from(request)
+                        serializer.save()
+                        return Response(
+                            {"msg": "Data Created"}, status=status.HTTP_201_CREATED
+                        )
+                return Response("Bad request data")
+            elif booking_type == 2:
+                if limits.meeting_room_limit > len(exist_booking):
+                    if serializer.is_valid():
+                        check_date_from(request)
+                        serializer.save()
+                        return Response(
+                            {"msg": "Data Created"}, status=status.HTTP_201_CREATED
+                        )
+                    return Response("Bad request data")
+            elif booking_type == 3:
+                if limits.parking_spot_limit > len(exist_booking):
+                    if serializer.is_valid():
+                        check_date_from(request)
+                        serializer.save()
+                        return Response(
+                            {"msg": "Data Created"}, status=status.HTTP_201_CREATED
+                        )
+                    return Response("Bad request data")
+
         return Response("nieko nevyksta")

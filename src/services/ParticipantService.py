@@ -7,11 +7,6 @@ from team.models import Participation
 
 
 def identity_roles(user):
-    print("Identity roles")
-    # users = Participation.objects.all()
-    # for user in users:
-    #     # print(i.id, i.team, i.account, i.role)
-
-    for a in Participation.ROLE:
-        if user.role == a[0]:
-            return user.role, a[1]
+    for role in Participation.ROLE:
+        if user.role == role[0]:
+            return user.role, role[1]
