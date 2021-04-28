@@ -2,6 +2,8 @@ from src.exceptions.bookingException import BadRequestException
 from booking.models import BookableType, Bookable, BookableTypeLimit
 from rest_framework.response import Response
 from rest_framework import viewsets, status
+from src.services.AuthenticationService import get_auth_user_name
+from src.services.BookingService import check_date_from
 
 
 def get_workspace_count():
@@ -45,7 +47,14 @@ def check_request_bookable_type(request):
     return bookable.bookable_type
 
 
-def request_save_data(serializer):
+def request_save_data(serializer, request):
     if serializer.is_valid():
+        check_date_from(request)
         serializer.save()
-        return Response({"msg": "Data Created"}, status=status.HTTP_201_CREATED)
+        username = get_auth_user_name(request)
+        return Response(
+            {"msg": str(username) + " created data"},
+            status=status.HTTP_201_CREATED,
+        )
+    else:
+        return Response("No action!")
