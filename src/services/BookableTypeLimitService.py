@@ -49,7 +49,20 @@ def check_request_bookable_type(request):
 
 def request_save_data(serializer, request):
     if serializer.is_valid():
-        check_date_from(request)
+        # check_date_from(request)
+        serializer.save()
+        username = get_auth_user_name(request)
+        return Response(
+            {"msg": str(username) + " created data"},
+            status=status.HTTP_201_CREATED,
+        )
+    else:
+        return Response("No action!")
+
+
+def bookable_request_save_data(serializer, request):
+    if serializer.is_valid():
+
         serializer.save()
         username = get_auth_user_name(request)
         return Response(

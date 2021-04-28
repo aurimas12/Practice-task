@@ -13,6 +13,8 @@ def user_role_limitations_for_created(request):
     data = request.data["participant_id"]
     participant = Participation.objects.get(id=data)
     participant_role = participant.role
+    print("limitations")
+    print(role, participant_role)
 
     if role == participant_role:
         return True
