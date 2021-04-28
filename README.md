@@ -42,3 +42,12 @@ Participant roles:
 - Testing endpoints with tst data are all is good working
 - Create user Authentication
 - Then create booking show what user make this booking
+
+> Task 8:
+
+- Team views update
+- Use routers
+- Create users endpoints
+- Create url team
+- Create url participant 
+- Update get_xxx_count() function
