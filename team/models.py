@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 class Team(models.Model):
     members = models.ManyToManyField(User, through="Participation")
     name = models.CharField(max_length=255, validators=[])
-    url = models.SlugField(max_length=64, validators=[])  # Should be Unique? Of course
+    url = models.SlugField(max_length=64, validators=[])
     logo = models.ImageField(upload_to="", blank=True, null=True)
 
     def __str__(self):
@@ -24,7 +24,6 @@ class Participation(models.Model):
     ROLE_ASSISTANT = 2
     ROLE_USER = 3
 
-    # private field
     ROLE = (
         (ROLE_ADMIN, ("Admin")),
         (ROLE_ASSISTANT, ("Assistant")),
@@ -38,6 +37,3 @@ class Participation(models.Model):
         User, on_delete=models.CASCADE, related_name="participations"
     )
     role = models.PositiveSmallIntegerField(choices=ROLE)
-
-    # def __str__(self):
-    #     return self.account.username

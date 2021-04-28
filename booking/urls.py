@@ -6,7 +6,6 @@ from booking.views import (
     BookableTypeLimitViewSet,
 )
 
-# from .views import update
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,

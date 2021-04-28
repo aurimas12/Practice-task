@@ -1,16 +1,15 @@
 from django.urls import include, path
-from team.views import (
-    get_participants_all,
-    participant_by_id,
-    CreateParticipation,
-    ParticipantUpdate,
-    participant_delete,
-)
+from team.views import TeamViewSet, ParticipantViewSet
+
 
 urlpatterns = [
-    path("team/participant/all", get_participants_all),
-    path("team/participant/<int:pk>/", participant_by_id),
-    path("team/participant/create", CreateParticipation.as_view()),
-    path("team/participant/<int:pk>/update", ParticipantUpdate.as_view()),
-    path("team/participant/<int:pk>/delete/", participant_delete),
+    # Team
+    path("team/all", TeamViewSet.as_view({"get": "list"})),
+    path("team/create", TeamViewSet.as_view({"post": "create"})),
+    path("team/delete/<int:pk>", TeamViewSet.as_view({"delete": "destroy"})),
+    # Participant
+    path("participant/all", TeamViewSet.as_view({"get": "list"})),
+    path("participant/create", TeamViewSet.as_view({"post": "create"})),
+    path("participant/delete/<int:pk>", TeamViewSet.as_view({"delete": "destroy"})),
+    path("participant/edit/<int:pk>", ParticipantViewSet.as_view({"put": "update"})),
 ]

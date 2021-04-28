@@ -1,8 +1,5 @@
 from rest_framework import viewsets, status
 from rest_framework.response import Response
-from rest_framework.decorators import action
-from rest_framework.decorators import api_view
-from rest_framework.views import APIView
 
 from .models import BookableType, Bookable, Booking, BookableTypeLimit, Participation
 
@@ -40,10 +37,6 @@ class BookableTypeLimitViewSet(viewsets.ModelViewSet):
     def list(self, request, **kwargs):
         queryset = BookableTypeLimit.objects.all()
         serializer = BookableTypeLimitSerializer(queryset, many=True)
-
-        # return account auth name - testing
-        # print(get_auth_user_name(request))
-        # print(request.user)
         return Response(serializer.data)
 
 
