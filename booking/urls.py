@@ -7,8 +7,15 @@ from booking.views import (
 )
 
 # from .views import update
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
 
 urlpatterns = [
+    # Authentication
+    path("auth/token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
+    path("auth/token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
     # BookableTypeLimit
     path(
         "bookable-type-limit/all",

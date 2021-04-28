@@ -3,7 +3,7 @@ from .serializers import TeamSerializer, ParticipantSerializer
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework import generics, mixins, viewsets
-
+from src.services.BookableTypeLimitService import bookable_request_save_data
 
 # list all participants
 @api_view(["GET"])
@@ -21,6 +21,8 @@ def participant_by_id(req, pk):
     return Response(serializer.data)
 
 
+from src.services.BookableTypeLimitService import get_auth_user_name
+
 # create participant
 class CreateParticipation(
     generics.GenericAPIView,
@@ -29,6 +31,8 @@ class CreateParticipation(
     serializer_class = ParticipantSerializer
 
     def post(self, request):
+        print(get_auth_user_name(request))
+        print(get_auth_user_name(request).id)
         return self.create(request)
 
 

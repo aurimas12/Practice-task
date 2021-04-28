@@ -1,4 +1,6 @@
 from pathlib import Path
+from datetime import timedelta
+import rest_framework_simplejwt
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -29,6 +31,7 @@ INSTALLED_APPS = [
     "drf_yasg",
     "team",
     "booking",
+    # "rest_framework_simplejwt",
 ]
 
 MIDDLEWARE = [
@@ -101,12 +104,22 @@ AUTH_PASSWORD_VALIDATORS = [
 SWAGGER_SETTINGS = {
     "USE_SESSION_AUTH": False,
     "JSON_EDITOR": True,
+    "SECURITY_DEFINITIONS": {
+        "api_key": {"type": "apiKey", "in": "header", "name": "Authorization"}
+    },
 }
 
 REST_FRAMEWORK = {
-    "DEFAULT_AUTHENTICATION_CLASSES": (
-        "rest_framework.authentication.TokenAuthentication",
-    ),
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        # "rest_framework.authentication.TokenAuthentication",
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    ],
+    "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
+}
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(hours=8),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
+    "AUTH_HEADER_TYPES": ("Bearer",),
 }
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
