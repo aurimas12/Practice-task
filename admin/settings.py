@@ -32,9 +32,10 @@ INSTALLED_APPS = [
     "team",
     "booking",
     "group",
+    "users",
     # "rest_framework_simplejwt",
 ]
-
+# AUTH_USER_MODEL = "users.NewUser"
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
