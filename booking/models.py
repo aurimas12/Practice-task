@@ -1,5 +1,6 @@
 from django.db import models
 from team.models import Team, Participation
+from group.models import Group
 
 # Create your models here.
 
@@ -29,6 +30,8 @@ class Bookable(models.Model):
     bookable_type_id = models.ForeignKey(BookableType, on_delete=models.CASCADE)
     name = models.CharField(max_length=256)
     team_id = models.ForeignKey(Team, on_delete=models.CASCADE)
+    # group = models.ManyToManyField(Group, blank=True)
+    group = models.ManyToManyField(Group, null=True, blank=True)
 
 
 class Booking(models.Model):
