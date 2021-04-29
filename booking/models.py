@@ -31,7 +31,7 @@ class Bookable(models.Model):
     name = models.CharField(max_length=256)
     team_id = models.ForeignKey(Team, on_delete=models.CASCADE)
     # group = models.ManyToManyField(Group, blank=True)
-    group = models.ManyToManyField(Group, null=True, blank=True)
+    group_id = models.ManyToManyField(Group, null=True, blank=True)
 
 
 class Booking(models.Model):
