@@ -11,6 +11,7 @@ from django.contrib.auth.models import (
     BaseUserManager,
 )
 from django.core.exceptions import ValidationError
+from group.models import Group
 
 # from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 # Create your models here.
@@ -47,7 +48,7 @@ class NewUser(AbstractBaseUser):
     about = models.TextField("about", max_length=500, blank=True)
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=False)
-
+    group_id = models.ManyToManyField(Group, blank=True)
     objects = CustomAccountManager()
 
     USERNAME_FIELD = "email"
