@@ -56,4 +56,4 @@ Participant roles:
 
 - Create groups model
 - We can add few goups in Bookable objects
-- We can add few goups in Bookable objects
+
