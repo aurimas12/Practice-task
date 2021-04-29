@@ -26,7 +26,7 @@ class BookingViewSetTestCase(TestCase):
             participant_id=self.participation,
         )
 
-    def test_create_booking(self):
+    def test_create_booking_then_overlapping_booking(self):
         valid_data = {
             "date_from": "2021-04-22T22:14:33.575Z",
             "date_to": "2021-04-22T22:14:33.575Z",
