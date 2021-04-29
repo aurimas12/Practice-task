@@ -1,5 +1,6 @@
 from rest_framework import serializers
-from .models import BookableType, Bookable, Booking, BookableTypeLimit
+from .models import BookableType, Bookable, Booking, BookableTypeLimit, Group
+from group.serializers import GroupSerializer
 
 
 class BookableTypeSerializer(serializers.ModelSerializer):
@@ -18,6 +19,7 @@ class BookableSerializer(serializers.ModelSerializer):
     class Meta:
         model = Bookable
         fields = "__all__"
+        # fields = ("bookable_type_id", "name", "team_id", "group")
 
 
 class BookingSerializer(serializers.ModelSerializer):
