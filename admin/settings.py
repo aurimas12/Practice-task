@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     "drf_yasg",
     "team",
     "booking",
+    "group",
     # "rest_framework_simplejwt",
 ]
 
