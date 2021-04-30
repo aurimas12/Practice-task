@@ -53,7 +53,7 @@ class BookableTypeLimitService:
                 status=status.HTTP_201_CREATED,
             )
         else:
-            return Response("No action!")
+            return Response(serializer.errors)
 
     def bookable_request_save_data(serializer, request):
         if serializer.is_valid():
