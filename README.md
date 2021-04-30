@@ -51,9 +51,13 @@ Participant roles:
 - Create url team
 - Create url participant 
 - Update get_xxx_count() function
-- 
+
 > Task 8:
 
 - Create groups model
 - We can add few goups in Bookable objects
 
+> Task 9:
+
+- Fix user authorization bug
+- Add in docker kong and konga
