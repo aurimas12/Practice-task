@@ -14,7 +14,6 @@ from .serializers import (
     BookableSerializer,
     BookingSerializer,
     BookableTypeLimitSerializer,
-    CreateUserSerializer,
 )
 
 from src.services.BookingService import (
@@ -28,17 +27,6 @@ from src.services.ParticipantService import identity_roles, identity_account
 from src.services.AuthenticationService import get_auth_user_name
 from rest_framework import permissions
 from django.contrib.auth.models import User
-
-
-class UserViewSet(viewsets.ModelViewSet):
-    queryset = User.objects.all()
-    serializer_class = CreateUserSerializer
-
-    def create(self, request):
-
-        serializer = CreateUserSerializer(data=request.data)
-        return BookableTypeLimitService.request_save_data(serializer, request)
-        return Response("Create")
 
 
 class BookableTypeLimitViewSet(viewsets.ModelViewSet):

@@ -4,21 +4,9 @@ from .models import (
     Bookable,
     Booking,
     BookableTypeLimit,
-    Group,
 )
-from group.serializers import GroupSerializer
 from django.contrib.auth.models import User
-
-
-from django.db import models
 from team.models import Team, Participation
-from group.models import Group
-
-
-class CreateUserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = "__all__"
 
 
 class BookableTypeSerializer(serializers.ModelSerializer):
@@ -37,7 +25,6 @@ class BookableSerializer(serializers.ModelSerializer):
     class Meta:
         model = Bookable
         fields = "__all__"
-        # fields = ("bookable_type_id", "name", "team_id", "group")
 
 
 class BookingSerializer(serializers.ModelSerializer):

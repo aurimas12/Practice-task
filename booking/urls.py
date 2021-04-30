@@ -4,7 +4,6 @@ from booking.views import (
     BookableViewSet,
     BookingViewSet,
     BookableTypeLimitViewSet,
-    UserViewSet,
 )
 
 from rest_framework_simplejwt.views import (
@@ -13,9 +12,6 @@ from rest_framework_simplejwt.views import (
 )
 
 urlpatterns = [
-    # Test view set
-    path("user/all", UserViewSet.as_view({"get": "list"})),
-    path("user/create", UserViewSet.as_view({"post": "create"})),
     # Authentication
     path("auth/token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
     path("auth/token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
