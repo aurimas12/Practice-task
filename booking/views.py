@@ -1,13 +1,20 @@
 from rest_framework import viewsets, status
 from rest_framework.response import Response
 
-from .models import BookableType, Bookable, Booking, BookableTypeLimit, Participation
+from .models import (
+    BookableType,
+    Bookable,
+    Booking,
+    BookableTypeLimit,
+    Participation,
+)
 
 from .serializers import (
     BookableTypeSerializer,
     BookableSerializer,
     BookingSerializer,
     BookableTypeLimitSerializer,
+    CreateUserSerializer,
 )
 
 from src.services.BookingService import (
@@ -20,16 +27,38 @@ from src.signals import create_post_signal
 from src.services.ParticipantService import identity_roles, identity_account
 from src.services.AuthenticationService import get_auth_user_name
 from rest_framework import permissions
+from django.contrib.auth.models import User
+
+
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = CreateUserSerializer
+
+    def create(self, request):
+
+        serializer = CreateUserSerializer(data=request.data)
+        return BookableTypeLimitService.request_save_data(serializer, request)
+        return Response("Create")
 
 
 class BookableTypeLimitViewSet(viewsets.ModelViewSet):
     queryset = BookableTypeLimit.objects.all()
     serializer_class = BookableTypeLimitSerializer
-    permission_classes = (permissions.IsAuthenticated,)
+    # permission_classes = (permissions.IsAuthenticated,)
 
     def list(self, request, **kwargs):
         queryset = BookableTypeLimit.objects.all()
         serializer = BookableTypeLimitSerializer(queryset, many=True)
+        # Create user and save to the database
+        # user = User.objects.create_user("string1", "myemail@crazymail.com", "string")
+
+        # Update fields and then save again
+        # user.first_name = "John"
+        # user.last_name = "Citizen"
+        # user.save()
+        # print("Save user info:", user)
+        print("all users")
+        print(User.objects.all()[0])
         return Response(serializer.data)
 
 
@@ -75,9 +104,6 @@ class BookableViewSet(viewsets.ModelViewSet):
                 )
 
         return Response(create_post_signal())
-
-
-from django.contrib.auth.models import User
 
 
 class BookingViewSet(viewsets.ModelViewSet):

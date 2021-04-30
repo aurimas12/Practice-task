@@ -1,6 +1,7 @@
 from django.db import models
 from team.models import Team, Participation
 from group.models import Group
+from django.contrib.auth.models import User
 
 # Create your models here.
 
