@@ -13,3 +13,4 @@ class TeamViewSet(viewsets.ModelViewSet):
 class ParticipantViewSet(viewsets.ModelViewSet):
     queryset = Participation.objects.all()
     serializer_class = ParticipantSerializer
+
