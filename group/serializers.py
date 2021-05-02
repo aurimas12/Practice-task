@@ -5,4 +5,5 @@ from .models import Group
 class GroupSerializer(serializers.ModelSerializer):
     class Meta:
         model = Group
-        fields = ("id", "name", "issystem", "isvisible")
+        fields = "__all__"
+        # fields = ("id", "name", "issystem", "isvisible")

@@ -4,6 +4,7 @@ from booking.views import (
     BookableViewSet,
     BookingViewSet,
     BookableTypeLimitViewSet,
+    # BookableGroupViewSet,
 )
 
 from rest_framework_simplejwt.views import (
@@ -43,27 +44,22 @@ urlpatterns = [
         name="bookable-type",
     ),
     # Bookable
-    path("bookable/all", BookableViewSet.as_view({"get": "list"}), name="bookable"),
+    path("bookable/all", BookableViewSet.as_view({"get": "list"})),
     path(
         "bookable/edit/<int:pk>",
         BookableViewSet.as_view({"put": "update"}),
-        name="bookable",
     ),
-    path(
-        "bookable/create", BookableViewSet.as_view({"post": "create"}), name="bookable"
-    ),
+    path("bookable/create", BookableViewSet.as_view({"post": "create"})),
     path(
         "bookable/get/<int:pk>",
         BookableViewSet.as_view({"get": "list"}),
-        name="bookable",
     ),
     path(
         "bookable/delete/<int:pk>",
         BookableViewSet.as_view({"delete": "destroy"}),
-        name="bookable",
     ),
     # Booking
-    path("booking/all", BookingViewSet.as_view({"get": "list"}), name="booking"),
+    path("booking/all", BookingViewSet.as_view({"get": "list"})),
     path(
         "booking/create",
         BookingViewSet.as_view({"post": "create"}),
@@ -72,6 +68,12 @@ urlpatterns = [
     path(
         "booking/delete/<int:pk>",
         BookingViewSet.as_view({"delete": "destroy"}),
-        name="bookable",
     ),
+    # Group Bookable
+    # path("bookable/group/all", BookableGroupViewSet.as_view({"get": "list"})),
+    # path("bookable/create/group", BookableGroupViewSet.as_view({"post": "create"})),
+    # path(
+    #     "bookable/<int:pk>/group",
+    #     BookableGroupViewSet.as_view({"get": "get_user_group"}),
+    # ),
 ]
