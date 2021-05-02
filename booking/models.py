@@ -31,6 +31,7 @@ class Bookable(models.Model):
     bookable_type_id = models.ForeignKey(BookableType, on_delete=models.CASCADE)
     name = models.CharField(max_length=256)
     team_id = models.ForeignKey(Team, on_delete=models.CASCADE)
+    group_id = models.ManyToManyField(Group, blank=True)
 
 
 class Booking(models.Model):
@@ -42,4 +43,4 @@ class Booking(models.Model):
 
 # class BookableGroup(models.Model):
 #     bookable_id = models.ForeignKey(Bookable, on_delete=models.CASCADE)
-#     group_id = models.ManyToManyField(Group, blank=True)
+#     # group_id = models.ManyToManyField(Group, blank=True)
