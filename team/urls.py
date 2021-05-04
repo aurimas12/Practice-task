@@ -4,7 +4,7 @@ from team.views import TeamViewSet, ParticipantViewSet
 
 urlpatterns = [
     # Team
-    path("team/all", TeamViewSet.as_view({"get": "list"})),
+    path("team", TeamViewSet.as_view({"get": "list"})),
     path("team/create", TeamViewSet.as_view({"post": "create"})),
     path("team/delete/<int:pk>", TeamViewSet.as_view({"delete": "destroy"})),
     # Participant
