@@ -61,3 +61,8 @@ Participant roles:
 
 - Fix user authorization bug
 - Add in docker kong and konga
+
+> Task 11:
+
+- Manually create services,routes,plugin and client credential OAuth 2.0
+- Create script,then start first time container in Kong create automatically services,routes,plugin and client credential
