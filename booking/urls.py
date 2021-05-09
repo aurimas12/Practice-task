@@ -4,7 +4,6 @@ from booking.views import (
     BookableViewSet,
     BookingViewSet,
     BookableTypeLimitViewSet,
-    # BookableGroupViewSet,
 )
 
 from rest_framework_simplejwt.views import (
@@ -69,11 +68,4 @@ urlpatterns = [
         "booking/delete/<int:pk>",
         BookingViewSet.as_view({"delete": "destroy"}),
     ),
-    # Group Bookable
-    # path("bookable/group/all", BookableGroupViewSet.as_view({"get": "list"})),
-    # path("bookable/create/group", BookableGroupViewSet.as_view({"post": "create"})),
-    # path(
-    #     "bookable/<int:pk>/group",
-    #     BookableGroupViewSet.as_view({"get": "get_user_group"}),
-    # ),
 ]
