@@ -34,7 +34,7 @@ from django.contrib.auth.models import User
 class BookableTypeLimitViewSet(viewsets.ModelViewSet):
     queryset = BookableTypeLimit.objects.all()
     serializer_class = BookableTypeLimitSerializer
-    # permission_classes = (permissions.IsAuthenticated,)
+    permission_classes = (permissions.IsAuthenticated,)
 
     def list(self, request, **kwargs):
         queryset = BookableTypeLimit.objects.all()

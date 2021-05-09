@@ -3,6 +3,9 @@ docker-compose up --build
 docker-compose up
 docker exec -it django bash
 
+# Docker start error
+docker ps -a
+
 #PostgresSQL
 docker exec -it pgdb psql -U postgres
 \c <database_name>
