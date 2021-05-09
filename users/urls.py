@@ -6,7 +6,7 @@ from drf_yasg import openapi
 from .views import UserViewSet, UserGroupViewSet
 
 urlpatterns = [
-    path("users/all", UserViewSet.as_view({"get": "list"})),
+    path("users/all", UserViewSet.as_view({"get": "list"}), name="test_user"),
     path("users/create", UserViewSet.as_view({"post": "create"})),
     path("users/group/all", UserGroupViewSet.as_view({"get": "list"})),
     path("users/create/group", UserGroupViewSet.as_view({"post": "create"})),

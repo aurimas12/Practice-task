@@ -10,8 +10,9 @@ curl -i -X POST http://kong:8001/services/ \
 
 # Create route
 curl -i -X POST http://kong:8001/services/booking/routes \
---data 'methods[]=GET'
 --data 'name=booking-routes'
+--data 'methods[]=GET'
+
 
 # Enable the OAuth 2.0 plugin for that service
 curl -i -X POST http://kong:8001/services/booking/plugins \
@@ -33,8 +34,6 @@ curl -i -X POST http://kong:8001/consumers/user1/key-auth \
 # --data "client_id=456" \
 # --data "client_secret=789" \
 # --data "redirect_uris=http://localhost:8000/api/"
-
 # --data 'name=my-route'
 # --data 'host=django'
 
-# curl -i -X POST --url http://kong:8001/services/api/routes --data 'methods[]=GET'
