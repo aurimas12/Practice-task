@@ -14,6 +14,12 @@ services:
     depends_on:
       - pgdb
 
+    healthcheck:
+      test: "/usr/src/app/test.sh > /var/log/init.log 2>&1"
+      interval: 20s
+      timeout: 3s
+      retries: 1
+
   pgdb:
     image: postgres:12.3
     container_name: pgdb
