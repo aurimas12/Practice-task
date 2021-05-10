@@ -35,3 +35,7 @@ class KongAuthorizationTestCase(TestCase):
         }
         result1 = requests.post("http://kong:8000/mockbin?key=123", headers=headers)
         self.assertEqual(result1.status_code, status.HTTP_200_OK)
+
+    def test_unauthorized(self):
+        result = requests.get("http://kong:8000/api/team")
+        self.assertEqual(result.status_code, status.HTTP_401_UNAUTHORIZED)

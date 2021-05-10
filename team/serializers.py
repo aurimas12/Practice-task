@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Team, Participation
+from .models import Team, Participation, Venue
 
 
 class TeamSerializer(serializers.ModelSerializer):
@@ -11,4 +11,10 @@ class TeamSerializer(serializers.ModelSerializer):
 class ParticipantSerializer(serializers.ModelSerializer):
     class Meta:
         model = Participation
+        fields = "__all__"
+
+
+class VenueSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Venue
         fields = "__all__"

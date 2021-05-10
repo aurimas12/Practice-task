@@ -1,5 +1,5 @@
-from .models import Team, Participation
-from .serializers import TeamSerializer, ParticipantSerializer
+from .models import Team, Participation, Venue
+from .serializers import TeamSerializer, ParticipantSerializer, VenueSerializer
 from rest_framework.response import Response
 
 from rest_framework import viewsets
@@ -14,3 +14,7 @@ class ParticipantViewSet(viewsets.ModelViewSet):
     queryset = Participation.objects.all()
     serializer_class = ParticipantSerializer
 
+
+class VenueViewSet(viewsets.ModelViewSet):
+    queryset = Venue.objects.all()
+    serializer_class = VenueSerializer

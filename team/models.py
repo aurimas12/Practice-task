@@ -37,3 +37,9 @@ class Participation(models.Model):
         User, on_delete=models.CASCADE, related_name="participations"
     )
     role = models.PositiveSmallIntegerField(choices=ROLE)
+
+
+class Venue(models.Model):
+    name = models.CharField(max_length=125)
+    team_id = models.ForeignKey(Team, on_delete=models.CASCADE, related_name="venue")
+    parent_id = models.PositiveSmallIntegerField(null=True, blank=False)
