@@ -2,8 +2,8 @@
 echo "Hello World"
 
 # Create workspace
-curl -i -X POST http://localhost:8001/workspaces \
---data "name=team-a"
+curl -i -X POST http://kong:8001/workspaces \
+--data 'name=team-a'
 
 # Create service
 curl -i -X POST http://localhost:8001/services/ \
@@ -35,3 +35,4 @@ curl -i -X POST http://localhost:8001/consumers/user1/oauth2 \
 --data "client_id=456" \
 --data "client_secret=789" \
 --data "redirect_uris=http://mockbin.org/"
+curl -X POST http://kong:8001/consumers/user1/oauth2
