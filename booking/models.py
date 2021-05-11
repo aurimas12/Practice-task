@@ -1,5 +1,6 @@
 from django.db import models
-from team.models import Team, Participation
+from team.models import Team, Participation, Venue
+
 from group.models import Group
 from django.contrib.auth.models import User
 
@@ -32,6 +33,7 @@ class Bookable(models.Model):
     name = models.CharField(max_length=256)
     team_id = models.ForeignKey(Team, on_delete=models.CASCADE)
     group_id = models.ManyToManyField(Group, blank=True)
+    venue_id = models.ForeignKey(Venue, on_delete=models.CASCADE)
 
 
 class Booking(models.Model):

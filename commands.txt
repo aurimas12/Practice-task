@@ -26,7 +26,7 @@ manage.py migrate --fake [app_name] zero
 manage.py migrate [app_name]
 
 # Kong
-docker-compsoe up -d
+docker-compose up -d
 docker ps
 curl http://127.0.0.1:8001
 curl http://127.0.0.1:8001/services

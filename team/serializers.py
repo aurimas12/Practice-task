@@ -18,3 +18,4 @@ class VenueSerializer(serializers.ModelSerializer):
     class Meta:
         model = Venue
         fields = "__all__"
+        extra_kwargs = {"parent_id": {"required": True}}
