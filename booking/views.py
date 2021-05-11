@@ -7,7 +7,7 @@ from .models import (
     Booking,
     BookableTypeLimit,
     Participation,
-    # BookableGroup,
+    Venue,
 )
 
 from .serializers import (
@@ -15,9 +15,8 @@ from .serializers import (
     BookableSerializer,
     BookingSerializer,
     BookableTypeLimitSerializer,
-    # BookableGroupSerializer,
 )
-
+from team.serializers import VenueSerializer
 from src.services.BookingService import (
     check_date_from,
     user_role_limitations_for_created,
@@ -39,14 +38,7 @@ class BookableTypeLimitViewSet(viewsets.ModelViewSet):
     def list(self, request, **kwargs):
         queryset = BookableTypeLimit.objects.all()
         serializer = BookableTypeLimitSerializer(queryset, many=True)
-        # Create user and save to the database
-        # user = User.objects.create_user("string1", "myemail@crazymail.com", "string")
 
-        # Update fields and then save again
-        # user.first_name = "John"
-        # user.last_name = "Citizen"
-        # user.save()
-        # print("Save user info:", user)
         print("all users")
         print(User.objects.all()[0])
         return Response(serializer.data)
@@ -62,6 +54,11 @@ class BookableViewSet(viewsets.ModelViewSet):
     serializer_class = BookableSerializer
 
     def create(self, request):
+        bookable_all = Bookable.objects.all()
+
+        venues = [i.venue_id.id for i in bookable_all]
+        status = request.data["venue_id"] in venues
+
         serializer = BookableSerializer(data=request.data)
         request_bookable_type = BookableTypeLimitService.check_request_bookable_type(
             request
@@ -71,27 +68,27 @@ class BookableViewSet(viewsets.ModelViewSet):
             meeting_room,
             car_spot,
         ) = BookableTypeLimitService.get_bookable_types_limits()
+        if status == False:
+            if request_bookable_type == BookableType.TYPE_WORKSPACE:
+                workspace_limit = BookableTypeLimitService.get_workspace_count()
+                if workspace < workspace_limit:
+                    return BookableTypeLimitService.bookable_request_save_data(
+                        serializer, request
+                    )
 
-        if request_bookable_type == BookableType.TYPE_WORKSPACE:
-            workspace_limit = BookableTypeLimitService.get_workspace_count()
-            if workspace < workspace_limit:
-                return BookableTypeLimitService.bookable_request_save_data(
-                    serializer, request
-                )
+            elif request_bookable_type == BookableType.TYPE_MEETING_ROOM:
+                meeting_room_limit = BookableTypeLimitService.get_meeting_room_count()
+                if meeting_room < meeting_room_limit:
+                    return BookableTypeLimitService.bookable_request_save_data(
+                        serializer, request
+                    )
 
-        elif request_bookable_type == BookableType.TYPE_MEETING_ROOM:
-            meeting_room_limit = BookableTypeLimitService.get_meeting_room_count()
-            if meeting_room < meeting_room_limit:
-                return BookableTypeLimitService.bookable_request_save_data(
-                    serializer, request
-                )
-
-        elif request_bookable_type == BookableType.TYPE_PARKING_SPOT:
-            parking_spot_limit = BookableTypeLimitService.get_parking_spot_count()
-            if car_spot < parking_spot_limit:
-                return BookableTypeLimitService.bookable_request_save_data(
-                    serializer, request
-                )
+            elif request_bookable_type == BookableType.TYPE_PARKING_SPOT:
+                parking_spot_limit = BookableTypeLimitService.get_parking_spot_count()
+                if car_spot < parking_spot_limit:
+                    return BookableTypeLimitService.bookable_request_save_data(
+                        serializer, request
+                    )
 
         return Response(create_post_signal())
 

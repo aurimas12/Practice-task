@@ -33,6 +33,7 @@ Task management : https://task-api.atlassian.net/jira/software/projects/PT/board
 > Task 6:
 
 Participant roles:
+
 - Admin - ignores overlapping booking restrictions
 - Admin, assistant - when booking can specify the id of another user on whose behalf booking
 - User nothing changes
@@ -49,7 +50,7 @@ Participant roles:
 - Use routers
 - Create users endpoints
 - Create url team
-- Create url participant 
+- Create url participant
 - Update get_xxx_count() function
 
 > Task 9:
@@ -66,3 +67,10 @@ Participant roles:
 
 - Manually create services,routes,plugin and client credential OAuth 2.0
 - Create script,then start first time container in Kong create automatically services,routes,plugin and client credential
+
+> Task 12:
+
+- Avoiding cycle realtionship
+- Create Venue model
+- Add venue_id field in Bookable model
+- Create test testing Bookable
