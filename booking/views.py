@@ -8,6 +8,7 @@ from .models import (
     BookableTypeLimit,
     Participation,
     Venue,
+    TeamVenue,
 )
 
 from .serializers import (
@@ -15,6 +16,7 @@ from .serializers import (
     BookableSerializer,
     BookingSerializer,
     BookableTypeLimitSerializer,
+    TeamVenueSerializer,
 )
 from team.serializers import VenueSerializer
 from src.services.BookingService import (
@@ -163,3 +165,29 @@ class BookingViewSet(viewsets.ModelViewSet):
                         )
 
         return Response("No action!")
+
+
+class TeamVenueViewSet(viewsets.ModelViewSet):
+    queryset = TeamVenue.objects.all()
+    serializer_class = TeamVenueSerializer
+
+    def list(self, request, **kwargs):
+
+        items = Venue.objects.all()
+        booking_obj = []
+        list = []
+        for item in items:
+            venue_obj = Venue.objects.get(pk=item.id)
+            bookable_obj = Bookable.objects.filter(venue_id=venue_obj.id)
+            for i in bookable_obj:
+                try:
+                    booking_obj.append(Booking.objects.get(bookable_id=i.id))
+                except:
+                    break
+            teamVenue = TeamVenue.objects.create(venue_id=venue_obj)
+            teamVenue.bookable_id.set(bookable_obj)
+            teamVenue.booking_id.set(booking_obj)
+            booking_obj = []
+        queryset = TeamVenue.objects.all()
+        serializer = TeamVenueSerializer(queryset, many=True)
+        return Response(serializer.data)
