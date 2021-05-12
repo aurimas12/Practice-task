@@ -75,5 +75,5 @@ urlpatterns = [
         BookingViewSet.as_view({"delete": "destroy"}),
     ),
     # Team all
-    path("team-all/", TeamVenueViewSet.as_view({"get": "list"})),
+    path("team-all/", TeamVenueViewSet.as_view({"get": "list"}), name="team-all"),
 ]

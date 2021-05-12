@@ -74,15 +74,10 @@ class BookingViewSetTestCase(TestCase):
         self.user.set_password("string")
         self.user.save()
         self.team = Team.objects.create(name="Black Team", url="black")
-        # self.participation = Participation.objects.create(
-        #     role=1, team=self.team, account=self.user
-        # )
         self.venue1 = Venue.objects.create(
             name="test venue 1", parent_id=1, team_id=self.team
         )
-        self.venue2 = Venue.objects.create(
-            name="test venue 2", parent_id=1, team_id=self.team
-        )
+
         self.bookable_type = BookableType.objects.create(
             bookable_type=1, name="workspace"
         )
@@ -100,8 +95,6 @@ class BookingViewSetTestCase(TestCase):
         )
 
     def test_bookable_create_endpoint(self):
-        print("bookable")
-        print(Bookable.objects.all())
         valid_data = {
             "name": "4",
             "bookable_type_id": self.bookabletype.id,
@@ -109,20 +102,19 @@ class BookingViewSetTestCase(TestCase):
             "venue_id": self.venue1.id,
             "group_id": [1],
         }
-        print("1a")
-        print(self.venue2.id)
-        print(self.venue2)
-        print(valid_data)
         client = APIClient()
-        # self.user = authenticate(username="admin", password="admin")
         login = client.force_authenticate(self.user)
-        # self.assertTrue(login)
+
         response = client.post(
             reverse("bookable-create"),
             data=valid_data,
         )
-        print(response.status_code)
-        print(response.data)
-        print([i.venue_id for i in Bookable.objects.all()])
-        # self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-        # self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+
+    def test_team_all_endpoint(self):
+        client = APIClient()
+        login = client.force_authenticate(self.user)
+        response = client.get(
+            reverse("team-all"),
+        )
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
