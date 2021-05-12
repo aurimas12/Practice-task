@@ -13,7 +13,8 @@ urlpatterns = [
     path("participant/delete/<int:pk>", TeamViewSet.as_view({"delete": "destroy"})),
     path("participant/edit/<int:pk>", ParticipantViewSet.as_view({"put": "update"})),
     # Venue
-    path("venue", VenueViewSet.as_view({"get": "list"})),
+    path("venue/all", VenueViewSet.as_view({"get": "list"})),
     path("venue/create", VenueViewSet.as_view({"post": "create"})),
-    path("venue/paths", VenueViewSet.as_view({"get": "list_venues_paths"})),
+    path("venue/delete/<int:pk>", VenueViewSet.as_view({"delete": "destroy"})),
+    path("venue/edit/<int:pk>", VenueViewSet.as_view({"put": "update"})),
 ]

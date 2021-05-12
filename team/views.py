@@ -20,20 +20,20 @@ class VenueViewSet(viewsets.ModelViewSet):
     queryset = Venue.objects.all()
     serializer_class = VenueSerializer
 
-    def list_venues_paths(self, request, **kwargs):
-        serializer_class = TeamSerializer
-        items = Venue.objects.all()
-        booking_obj = []
-        list = []
-        for item in items:
-            venue_obj = Venue.objects.get(pk=item.id)
-            bookable_obj = Bookable.objects.filter(venue_id=venue_obj.id)
-            for i in bookable_obj:
-                try:
-                    booking_obj.append(Booking.objects.get(bookable_id=i.id))
-                except:
-                    break
-            list.append([(venue_obj), (bookable_obj), (booking_obj)])
-            booking_obj = []
+    # def list_venues_paths(self, request, **kwargs):
+    #     serializer_class = TeamSerializer
+    #     items = Venue.objects.all()
+    #     booking_obj = []
+    #     list = []
+    #     for item in items:
+    #         venue_obj = Venue.objects.get(pk=item.id)
+    #         bookable_obj = Bookable.objects.filter(venue_id=venue_obj.id)
+    #         for i in bookable_obj:
+    #             try:
+    #                 booking_obj.append(Booking.objects.get(bookable_id=i.id))
+    #             except:
+    #                 break
+    #         list.append([(venue_obj), (bookable_obj), (booking_obj)])
+    #         booking_obj = []
 
-        return Response(str(list))
+    #     return Response(str(list))
