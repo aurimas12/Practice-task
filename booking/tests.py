@@ -1,9 +1,19 @@
 from django.test import TestCase
-from .models import Booking, Bookable, BookableType, Team, Participation
+from .models import (
+    Booking,
+    Bookable,
+    BookableType,
+    Team,
+    Participation,
+    Venue,
+    Group,
+    BookableTypeLimit,
+)
 from rest_framework import status
 from django.test.client import Client
 from django.urls import reverse
 from django.contrib.auth import get_user_model
+from rest_framework.test import APIClient
 
 User = get_user_model()
 
@@ -25,6 +35,7 @@ User = get_user_model()
 #             bookable_id=self.bookable,
 #             participant_id=self.participation,
 #         )
+
 
 #     def test_create_booking_then_overlapping_booking(self):
 #         valid_data = {
@@ -53,3 +64,65 @@ User = get_user_model()
 
 #         self.assertEqual(response1.status_code, status.HTTP_201_CREATED)
 #         self.assertEqual(response2.status_code, status.HTTP_400_BAD_REQUEST)
+
+from django.contrib.auth import authenticate
+
+
+class BookingViewSetTestCase(TestCase):
+    def setUp(self):
+        self.user = User.objects.create(username="string", password="string")
+        self.user.set_password("string")
+        self.user.save()
+        self.team = Team.objects.create(name="Black Team", url="black")
+        # self.participation = Participation.objects.create(
+        #     role=1, team=self.team, account=self.user
+        # )
+        self.venue1 = Venue.objects.create(
+            name="test venue 1", parent_id=1, team_id=self.team
+        )
+        self.venue2 = Venue.objects.create(
+            name="test venue 2", parent_id=1, team_id=self.team
+        )
+        self.bookable_type = BookableType.objects.create(
+            bookable_type=1, name="workspace"
+        )
+        self.group = Group.objects.create(name="group 1", issystem=True, isvisible=True)
+        self.bookabletype = BookableType.objects.create(bookable_type=1, name="strin2g")
+        self.bookable = Bookable.objects.create(
+            name="string",
+            bookable_type_id=self.bookabletype,
+            team_id=self.team,
+            venue_id=self.venue1,
+        )
+        self.bookable.group_id.add(self.group)
+        self.bookable_type_limit = BookableTypeLimit.objects.create(
+            workspace_limit=10, meeting_room_limit=10, parking_spot_limit=10
+        )
+
+    def test_bookable_create_endpoint(self):
+        print("bookable")
+        print(Bookable.objects.all())
+        valid_data = {
+            "name": "4",
+            "bookable_type_id": self.bookabletype.id,
+            "team_id": self.team.id,
+            "venue_id": self.venue1.id,
+            "group_id": [1],
+        }
+        print("1a")
+        print(self.venue2.id)
+        print(self.venue2)
+        print(valid_data)
+        client = APIClient()
+        # self.user = authenticate(username="admin", password="admin")
+        login = client.force_authenticate(self.user)
+        # self.assertTrue(login)
+        response = client.post(
+            reverse("bookable-create"),
+            data=valid_data,
+        )
+        print(response.status_code)
+        print(response.data)
+        print([i.venue_id for i in Bookable.objects.all()])
+        # self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        # self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)

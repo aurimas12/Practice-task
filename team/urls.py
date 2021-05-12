@@ -15,4 +15,5 @@ urlpatterns = [
     # Venue
     path("venue", VenueViewSet.as_view({"get": "list"})),
     path("venue/create", VenueViewSet.as_view({"post": "create"})),
+    path("venue/paths", VenueViewSet.as_view({"get": "list_venues_paths"})),
 ]

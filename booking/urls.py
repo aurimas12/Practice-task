@@ -49,7 +49,11 @@ urlpatterns = [
         "bookable/edit/<int:pk>",
         BookableViewSet.as_view({"put": "update"}),
     ),
-    path("bookable/create", BookableViewSet.as_view({"post": "create"})),
+    path(
+        "bookable/create",
+        BookableViewSet.as_view({"post": "create"}),
+        name="bookable-create",
+    ),
     path(
         "bookable/get/<int:pk>",
         BookableViewSet.as_view({"get": "list"}),

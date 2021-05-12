@@ -41,8 +41,3 @@ class Booking(models.Model):
     date_from = models.DateTimeField()
     date_to = models.DateTimeField()
     participant_id = models.ForeignKey(Participation, on_delete=models.CASCADE)
-
-
-# class BookableGroup(models.Model):
-#     bookable_id = models.ForeignKey(Bookable, on_delete=models.CASCADE)
-#     # group_id = models.ManyToManyField(Group, blank=True)

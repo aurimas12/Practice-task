@@ -42,4 +42,4 @@ class Participation(models.Model):
 class Venue(models.Model):
     name = models.CharField(max_length=125)
     team_id = models.ForeignKey(Team, on_delete=models.CASCADE, related_name="venue")
-    parent_id = models.PositiveSmallIntegerField(blank=True)
+    parent_id = models.PositiveSmallIntegerField(blank=True, null=True)
