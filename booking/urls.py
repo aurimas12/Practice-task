@@ -68,7 +68,7 @@ urlpatterns = [
     path(
         "booking/create",
         BookingViewSet.as_view({"post": "create"}),
-        name="booking_create",
+        name="booking-create",
     ),
     path(
         "booking/delete/<int:pk>",
